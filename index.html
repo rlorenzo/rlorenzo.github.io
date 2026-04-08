@@ -3,12 +3,510 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Rex Lorenzo</title>
+    <title>Rex Lorenzo — Developer</title>
+    <meta name="description" content="Rex Lorenzo's projects — portfolio, games, and experiments." />
     <script
       async
       src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8161723607866966"
       crossorigin="anonymous"
     ></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      :root {
+        --bg: #faf6f0;
+        --bg-card: #ffffff;
+        --text: #2c2418;
+        --text-muted: #8a7e72;
+        --accent: #b5693a;
+        --accent-glow: #b5693a20;
+        --border: #e2dbd2;
+        --font-display: "Instrument Serif", Georgia, serif;
+        --font-body: "DM Sans", system-ui, sans-serif;
+      }
+
+      html {
+        font-size: 16px;
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: var(--font-body);
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.6;
+        min-height: 100vh;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      /* ── Grain overlay ─────────────────────────────── */
+      body::after {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 100;
+        opacity: 0.02;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+        background-repeat: repeat;
+        background-size: 256px;
+      }
+
+      /* ── Container ─────────────────────────────────── */
+      .page {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 0 32px;
+      }
+
+      /* ── Header ────────────────────────────────────── */
+      header {
+        padding: 48px 0 0;
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        opacity: 0;
+        animation: fadeIn 0.8s ease forwards;
+      }
+
+      .wordmark {
+        font-family: var(--font-display);
+        font-size: 20px;
+        color: var(--text);
+        letter-spacing: -0.02em;
+      }
+
+      .wordmark em {
+        color: var(--accent);
+        font-style: italic;
+      }
+
+      nav {
+        display: flex;
+        gap: 28px;
+      }
+
+      nav a {
+        font-size: 13px;
+        font-weight: 500;
+        color: var(--text-muted);
+        text-decoration: none;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        transition: color 0.3s ease;
+      }
+
+      nav a:hover {
+        color: var(--accent);
+      }
+
+      /* ── Hero ──────────────────────────────────────── */
+      .hero {
+        padding: 120px 0 80px;
+        position: relative;
+      }
+
+      .hero-label {
+        font-size: 12px;
+        font-weight: 500;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 24px;
+        opacity: 0;
+        animation: slideUp 0.7s ease 0.2s forwards;
+      }
+
+      .hero h1 {
+        font-family: var(--font-display);
+        font-size: clamp(48px, 8vw, 96px);
+        font-weight: 400;
+        line-height: 1.05;
+        letter-spacing: -0.03em;
+        color: var(--text);
+        max-width: 800px;
+        opacity: 0;
+        animation: slideUp 0.8s ease 0.35s forwards;
+      }
+
+      .hero h1 em {
+        font-style: italic;
+        color: var(--accent);
+      }
+
+      .hero-sub {
+        margin-top: 32px;
+        font-size: 17px;
+        color: var(--text-muted);
+        max-width: 440px;
+        line-height: 1.7;
+        opacity: 0;
+        animation: slideUp 0.8s ease 0.5s forwards;
+      }
+
+      /* ── Decorative line ───────────────────────────── */
+      .divider {
+        height: 1px;
+        background: linear-gradient(90deg, var(--accent), var(--border) 60%, transparent);
+        margin-bottom: 64px;
+        opacity: 0;
+        animation: fadeIn 1s ease 0.6s forwards;
+      }
+
+      /* ── Section heading ───────────────────────────── */
+      .section-label {
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+        margin-bottom: 48px;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        opacity: 0;
+        animation: fadeIn 0.8s ease 0.7s forwards;
+      }
+
+      .section-label::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: var(--border);
+      }
+
+      /* ── Project cards ─────────────────────────────── */
+      .projects {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+        padding-bottom: 80px;
+      }
+
+      .card {
+        position: relative;
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 40px 36px 36px;
+        background: var(--bg-card);
+        text-decoration: none;
+        color: var(--text);
+        display: flex;
+        flex-direction: column;
+        min-height: 320px;
+        overflow: hidden;
+        transition:
+          border-color 0.4s ease,
+          transform 0.4s ease,
+          box-shadow 0.4s ease;
+        opacity: 0;
+      }
+
+      .card:nth-child(1) {
+        animation: slideUp 0.7s ease 0.8s forwards;
+      }
+
+      .card:nth-child(2) {
+        animation: slideUp 0.7s ease 0.95s forwards;
+      }
+
+      .card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: 16px;
+        background: radial-gradient(
+          ellipse 300px 200px at 50% 0%,
+          var(--glow, transparent),
+          transparent
+        );
+        opacity: 0;
+        transition: opacity 0.5s ease;
+        pointer-events: none;
+      }
+
+      .card:hover {
+        border-color: var(--accent);
+        transform: translateY(-4px);
+        box-shadow: 0 24px 64px -16px rgba(0, 0, 0, 0.1);
+      }
+
+      .card:hover::before {
+        opacity: 1;
+      }
+
+      .card-number {
+        font-family: var(--font-display);
+        font-size: 64px;
+        font-style: italic;
+        color: var(--accent);
+        opacity: 0.15;
+        position: absolute;
+        top: 20px;
+        right: 28px;
+        line-height: 1;
+        pointer-events: none;
+      }
+
+      .card-tag {
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 20px;
+      }
+
+      .card h2 {
+        font-family: var(--font-display);
+        font-size: 32px;
+        font-weight: 400;
+        letter-spacing: -0.02em;
+        line-height: 1.2;
+        margin-bottom: 16px;
+      }
+
+      .card p {
+        font-size: 14px;
+        color: var(--text-muted);
+        line-height: 1.7;
+        flex: 1;
+      }
+
+      .card-footer {
+        margin-top: 28px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .card-tech {
+        display: flex;
+        gap: 8px;
+      }
+
+      .card-tech span {
+        font-size: 11px;
+        font-weight: 500;
+        padding: 4px 10px;
+        border-radius: 100px;
+        background: rgba(212, 165, 116, 0.08);
+        color: var(--text-muted);
+        border: 1px solid var(--border);
+      }
+
+      .card-arrow {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        border: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition:
+          background 0.3s ease,
+          border-color 0.3s ease,
+          transform 0.3s ease;
+      }
+
+      .card-arrow svg {
+        width: 14px;
+        height: 14px;
+        stroke: var(--text-muted);
+        transition: stroke 0.3s ease;
+      }
+
+      .card:hover .card-arrow {
+        background: var(--accent);
+        border-color: var(--accent);
+        transform: rotate(-45deg);
+      }
+
+      .card:hover .card-arrow svg {
+        stroke: #fff;
+      }
+
+      /* Card-specific glow colors */
+      .card--portfolio {
+        --glow: rgba(138, 180, 140, 0.12);
+      }
+
+      .card--game {
+        --glow: rgba(181, 105, 58, 0.1);
+      }
+
+      /* ── Footer ────────────────────────────────────── */
+      footer {
+        border-top: 1px solid var(--border);
+        padding: 32px 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 13px;
+        color: var(--text-muted);
+        opacity: 0;
+        animation: fadeIn 0.8s ease 1.1s forwards;
+      }
+
+      footer a {
+        color: var(--text-muted);
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+
+      footer a:hover {
+        color: var(--accent);
+      }
+
+      .footer-links {
+        display: flex;
+        gap: 24px;
+      }
+
+      /* ── Animations ────────────────────────────────── */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      @keyframes slideUp {
+        from {
+          opacity: 0;
+          transform: translateY(24px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* ── Responsive ────────────────────────────────── */
+      @media (max-width: 720px) {
+        .page {
+          padding: 0 20px;
+        }
+
+        header {
+          flex-direction: column;
+          gap: 16px;
+          padding-top: 32px;
+        }
+
+        .hero {
+          padding: 72px 0 56px;
+        }
+
+        .projects {
+          grid-template-columns: 1fr;
+        }
+
+        .card {
+          min-height: 260px;
+        }
+
+        footer {
+          flex-direction: column;
+          gap: 16px;
+          text-align: center;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.01ms !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+    </style>
   </head>
-  <body></body>
+  <body>
+    <div class="page">
+      <header>
+        <div class="wordmark">Rex <em>Lorenzo</em></div>
+        <nav>
+          <a href="https://github.com/rlorenzo" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://linkedin.com/in/rexlorenzo" target="_blank" rel="noopener">LinkedIn</a>
+        </nav>
+      </header>
+
+      <section class="hero">
+        <p class="hero-label">Developer &amp; Creator</p>
+        <h1>Building things that are <em>fun to use</em></h1>
+        <p class="hero-sub">
+          Games, tools, and experiments. Here's what I've been working on.
+        </p>
+      </section>
+
+      <div class="divider"></div>
+
+      <div class="projects">
+        <a href="/portfolio/" class="card card--portfolio">
+          <span class="card-tag">Portfolio</span>
+          <h2>Portfolio</h2>
+          <p>
+            A collection of my work, experience, and the things I care about building.
+          </p>
+          <div class="card-footer">
+            <div class="card-tech">
+              <span>Web</span>
+              <span>Design</span>
+            </div>
+            <div class="card-arrow">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round">
+                <path d="M7 17L17 7M17 7H7M17 7V17" />
+              </svg>
+            </div>
+          </div>
+        </a>
+
+        <a href="/2048-Solver/" class="card card--game">
+          <span class="card-tag">Game</span>
+          <h2>Learn to Beat 2048</h2>
+          <p>
+            An AI-powered 2048 solver with coaching, move grading, and a strategy guide.
+            Play, learn, or watch the AI run.
+          </p>
+          <div class="card-footer">
+            <div class="card-tech">
+              <span>AI</span>
+              <span>Vanilla JS</span>
+              <span>Expectimax</span>
+            </div>
+            <div class="card-arrow">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round">
+                <path d="M7 17L17 7M17 7H7M17 7V17" />
+              </svg>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <footer>
+        <span>&copy; Rex Lorenzo</span>
+        <div class="footer-links">
+          <a href="https://github.com/rlorenzo" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://linkedin.com/in/rexlorenzo" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+      </footer>
+    </div>
+  </body>
 </html>
