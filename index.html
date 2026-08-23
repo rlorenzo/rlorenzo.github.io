@@ -565,6 +565,62 @@
         text-wrap: pretty;
       }
 
+      /* Group label separating "Try it now" from the secondary "More" list.
+         Mirrors .projects__eyebrow in the portfolio repo so both surfaces
+         read as one design system. */
+      .projects__eyebrow {
+        margin: 0 0 clamp(0.75rem, 1.5vw, 1.25rem);
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--brand);
+      }
+
+      .projects__list + .projects__eyebrow {
+        margin-top: clamp(2.5rem, 5vw, 4rem);
+      }
+
+      .projects__list--compact {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+
+      @media (min-width: 640px) {
+        .projects__list--compact {
+          grid-template-columns: repeat(2, 1fr);
+          column-gap: clamp(1.5rem, 3vw, 2.5rem);
+        }
+      }
+
+      .projects__row--compact {
+        padding-block: clamp(0.875rem, 1.25vw, 1.125rem);
+        padding-inline: clamp(0.5rem, 1.25vw, 0.875rem);
+        margin-inline: calc(-1 * clamp(0.5rem, 1.25vw, 0.875rem));
+        display: block;
+        /* Side by side on desktop, so a :last-child border would underline only
+           one of the pair. Neither carries one. */
+        border-bottom: none;
+      }
+
+      .projects__title--compact {
+        font-size: clamp(1.0625rem, 0.6vw + 0.85rem, 1.1875rem);
+        font-variation-settings: "opsz" 20, "wdth" 100;
+        letter-spacing: -0.012em;
+        margin-bottom: 0.375rem;
+      }
+
+      .projects__tech--compact {
+        font-size: 0.75rem;
+        margin-bottom: 0.375rem;
+      }
+
+      .projects__description--compact {
+        font-size: 0.875rem;
+        line-height: 1.5;
+      }
+
       /* ── Footer ──────────────────────────────────────────────────────── */
       .site-footer {
         background: var(--paper);
@@ -793,7 +849,27 @@
             <h2 class="projects__heading" id="projects-heading">Projects &amp; experiments</h2>
           </header>
 
-          <ol class="projects__list">
+          <p class="projects__eyebrow">Try it now</p>
+          <ol class="projects__list" aria-label="Live projects and games">
+            <li class="projects__row">
+              <div class="projects__left">
+                <h3 class="projects__title">
+                  <a class="projects__link" href="https://showhands.rexlorenzo.com" target="_blank" rel="noopener">
+                    <span class="projects__name">Show of Hands</span>
+                    <span class="projects__arrow" aria-hidden="true">&rarr;</span>
+                  </a>
+                </h3>
+                <p class="projects__tech">
+                  SvelteKit <span aria-hidden="true">·</span> TypeScript <span aria-hidden="true">·</span> SQLite
+                </p>
+              </div>
+              <p class="projects__description">
+                Instant polls for people in the same room. Share a QR code or a
+                four-letter code, watch the votes land live, then the whole thing
+                self-destructs. No accounts, nothing to install.
+              </p>
+            </li>
+
             <li class="projects__row">
               <div class="projects__left">
                 <h3 class="projects__title">
@@ -816,7 +892,26 @@
             <li class="projects__row">
               <div class="projects__left">
                 <h3 class="projects__title">
-                  <a class="projects__link" href="https://rushcall.rexlorenzo.com">
+                  <a class="projects__link" href="https://chinovalley.today" target="_blank" rel="noopener">
+                    <span class="projects__name">Chino Valley Today</span>
+                    <span class="projects__arrow" aria-hidden="true">&rarr;</span>
+                  </a>
+                </h3>
+                <p class="projects__tech">
+                  Astro <span aria-hidden="true">·</span> TypeScript <span aria-hidden="true">·</span> LLM pipeline
+                </p>
+              </div>
+              <p class="projects__description">
+                A daily news brief for Chino and Chino Hills. It reads the city council,
+                planning commission, and school board records so you do not have to,
+                and every claim links back to the record it came from.
+              </p>
+            </li>
+
+            <li class="projects__row">
+              <div class="projects__left">
+                <h3 class="projects__title">
+                  <a class="projects__link" href="https://rushcall.rexlorenzo.com" target="_blank" rel="noopener">
                     <span class="projects__name">Rush Call</span>
                     <span class="projects__arrow" aria-hidden="true">&rarr;</span>
                   </a>
@@ -832,40 +927,39 @@
                 subscribe to an RSS feed that surfaces new matches as they open.
               </p>
             </li>
+          </ol>
 
-            <li class="projects__row">
-              <div class="projects__left">
-                <h3 class="projects__title">
-                  <a class="projects__link" href="/portfolio/">
-                    <span class="projects__name">Portfolio</span>
-                    <span class="projects__arrow" aria-hidden="true">&rarr;</span>
-                  </a>
-                </h3>
-                <p class="projects__tech">
-                  Experience <span aria-hidden="true">·</span> Open source <span aria-hidden="true">·</span> Writing
-                </p>
-              </div>
-              <p class="projects__description">
-                The fuller story: twenty years of building production software, the
-                teams I have led, and the open-source work I keep coming back to.
+          <p class="projects__eyebrow">More</p>
+          <ol class="projects__list projects__list--compact" aria-label="More about Rex">
+            <li class="projects__row projects__row--compact">
+              <h3 class="projects__title projects__title--compact">
+                <a class="projects__link" href="https://portfolio.rexlorenzo.com" target="_blank" rel="noopener">
+                  <span class="projects__name">Portfolio</span>
+                  <span class="projects__arrow" aria-hidden="true">&rarr;</span>
+                </a>
+              </h3>
+              <p class="projects__tech projects__tech--compact">
+                Experience <span aria-hidden="true">·</span> Open source <span aria-hidden="true">·</span> Writing
+              </p>
+              <p class="projects__description projects__description--compact">
+                Twenty years of building production software, the teams I have led, and
+                the open-source work I keep coming back to.
               </p>
             </li>
 
-            <li class="projects__row">
-              <div class="projects__left">
-                <h3 class="projects__title">
-                  <a class="projects__link" href="/recommends/">
-                    <span class="projects__name">Things I recommend</span>
-                    <span class="projects__arrow" aria-hidden="true">&rarr;</span>
-                  </a>
-                </h3>
-                <p class="projects__tech">
-                  Tools &amp; services <span aria-hidden="true">·</span> Referral links
-                </p>
-              </div>
-              <p class="projects__description">
-                A short list of the services I actually pay for and use, with referral
-                links. I am upfront about which ones earn me a credit.
+            <li class="projects__row projects__row--compact">
+              <h3 class="projects__title projects__title--compact">
+                <a class="projects__link" href="/recommends/">
+                  <span class="projects__name">Things I recommend</span>
+                  <span class="projects__arrow" aria-hidden="true">&rarr;</span>
+                </a>
+              </h3>
+              <p class="projects__tech projects__tech--compact">
+                Tools &amp; services <span aria-hidden="true">·</span> Referral links
+              </p>
+              <p class="projects__description projects__description--compact">
+                A short list of the services I actually pay for and use. I am upfront
+                about which ones earn me a credit.
               </p>
             </li>
           </ol>
