@@ -11,6 +11,19 @@
     <meta name="author" content="Rex Lorenzo" />
     <meta name="theme-color" media="(prefers-color-scheme: light)" content="#faf8f4" />
     <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#15130f" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <!--
+      CSP note: pagead2.googlesyndication.com (AdSense loader) cannot be
+      pinned by hash/SRI, it is a self-updating remote script by design.
+      script-src/style-src need 'unsafe-inline' for the inline theme-flash
+      script below, the inline <style> block, and the Google Fonts <link>'s
+      onload handler further down; frame-ancestors is not set here because
+      browsers ignore it in a meta CSP (needs an HTTP header).
+    -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; base-uri 'self'; object-src 'none'; form-action 'self'; script-src 'self' 'unsafe-inline' https://pagead2.googlesyndication.com https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.googleadservices.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://pagead2.googlesyndication.com https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.googleadservices.com; connect-src 'self' https://pagead2.googlesyndication.com https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.googleadservices.com https://fonts.googleapis.com https://fonts.gstatic.com; frame-src https://googleads.g.doubleclick.net https://tpc.googlesyndication.com https://*.google.com"
+    />
 
     <!-- Favicon set, shared with rlorenzo.github.io/portfolio for one identity. -->
     <link rel="icon" type="image/svg+xml" href="/assets/favicon/favicon.svg" />
